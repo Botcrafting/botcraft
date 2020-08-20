@@ -2,7 +2,7 @@ package io.botcrafting.botcraft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Chat {
+public class ChatResponse {
     private long id;
     private @JsonProperty("first_name") String firstName;
     private @JsonProperty("last_name") String lastName;
@@ -11,7 +11,7 @@ public class Chat {
     private String type;
     private Boolean allMembersAreAdministrators;
 
-    public Chat(){}
+    public ChatResponse(){}
 
     public long getId() {
         return id;
@@ -45,16 +45,16 @@ public class Chat {
             return this;
         }
 
-        public Chat build(){
-            Chat chat = new Chat();
-            chat.id = this.id;
-            chat.firstName = this.firstName;
-            chat.lastName = this.lastName;
-            chat.title = this.title;
-            chat.type = this.type;
-            chat.allMembersAreAdministrators = this.allMembersAreAdministrators;
+        public ChatResponse build(){
+            ChatResponse chatResponse = new ChatResponse();
+            chatResponse.id = this.id;
+            chatResponse.firstName = this.firstName;
+            chatResponse.lastName = this.lastName;
+            chatResponse.title = this.title;
+            chatResponse.type = this.type;
+            chatResponse.allMembersAreAdministrators = this.allMembersAreAdministrators;
 
-            return chat;
+            return chatResponse;
         }
     }
 }

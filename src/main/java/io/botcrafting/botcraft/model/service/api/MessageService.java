@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.model.service;
+package io.botcrafting.botcraft.model.service.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

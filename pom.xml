@@ -12,7 +12,7 @@
 	<artifactId>botcraft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>botcraft</name>
-	<description>Botcraft, a Telegram chat bot</description>
+	<description>Botcraft, a Telegram chatResponse bot</description>
 
 	<properties>
 		<java.version>11</java.version>
