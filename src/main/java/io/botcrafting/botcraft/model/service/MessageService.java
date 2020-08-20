@@ -19,6 +19,10 @@ public class MessageService {
     public void handle(Update telegramUpdate) {
 
         if (telegramUpdate.getMessageText() != null) {
+            if (telegramUpdate.getMessage() == null || telegramUpdate.getMessage().getChat() == null) {
+                System.out.println("Message or Chat is null");
+                return;
+            }
             long chatId = telegramUpdate.getMessage().getChat().getId();
             String fullName = telegramUpdate.getMessage().getUser().getFirstName() + " " +  telegramUpdate.getMessage().getUser().getLastName();
             if (telegramUpdate.getMessageText().toLowerCase().equals(COMMAND_HELP)) {
