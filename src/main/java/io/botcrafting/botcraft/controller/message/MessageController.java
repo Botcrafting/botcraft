@@ -18,7 +18,7 @@ public class MessageController {
         return "OK";
     }
 
-    @RequestMapping(value = "/keep-alive" , method = RequestMethod.POST)
+    @RequestMapping(value = "/keep-alive" , method = RequestMethod.GET)
     @ResponseBody
     public String receiveKeepAliveRequest(){
         return "OK";
