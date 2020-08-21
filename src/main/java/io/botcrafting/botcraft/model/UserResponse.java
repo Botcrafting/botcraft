@@ -2,16 +2,16 @@ package io.botcrafting.botcraft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class User {
+public class UserResponse {
     private int id;
-    private @JsonProperty("is_bot")Boolean isBot;
+    private @JsonProperty("is_bot") Boolean isBot;
     private @JsonProperty("first_name") String firstName;
-    private @JsonProperty("last_name")String lastName;
-    private String userName;
+    private @JsonProperty("last_name") String lastName;
+    private @JsonProperty("username") String userName;
     private @JsonProperty("language_code") String languageCode;
 
 
-    public User(){}
+    public UserResponse(){}
 
     public int getId() {
         return id;
@@ -99,16 +99,16 @@ public class User {
             return this;
         }
 
-        public User build(){
-            User user = new User();
-            user.id = this.id;
-            user.isBot = this.isBot;
-            user.firstName = this.firstName;
-            user.lastName = this.lastName;
-            user.userName = this.userName;
-            user.languageCode = this.languageCode;
+        public UserResponse build(){
+            UserResponse userResponse = new UserResponse();
+            userResponse.id = this.id;
+            userResponse.isBot = this.isBot;
+            userResponse.firstName = this.firstName;
+            userResponse.lastName = this.lastName;
+            userResponse.userName = this.userName;
+            userResponse.languageCode = this.languageCode;
 
-            return user;
+            return userResponse;
         }
     }
 }
