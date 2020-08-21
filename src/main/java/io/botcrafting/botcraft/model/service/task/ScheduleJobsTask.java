@@ -11,7 +11,9 @@ public class ScheduleJobsTask {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+
+    //@Scheduled(fixedRate = 1000)
+    @Scheduled(cron = "0/1 0/1 0 ? * * *")
     public void keepAlive() {
         String url = BOTCRAFT_API_BASE_URL + "/keep-alive";
         System.out.println("I'm calling rest template on: " + url);

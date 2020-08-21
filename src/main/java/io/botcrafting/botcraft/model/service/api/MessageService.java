@@ -14,7 +14,8 @@ public class MessageService {
     private RestTemplate restTemplate;
 
     public void sendMessageText(String text, long chatId) {
-        String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendMessage";
+        //String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendMessage";
+        String url = API_TELEGRAM_BASE_URL + System.getenv("botBarzaiToken") + "/sendMessage";
         MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
         parts.add("chat_id", chatId);
         parts.add("text", text);
@@ -23,7 +24,8 @@ public class MessageService {
     }
 
     public void sendMessageVideo(String videoUrl, long chatId) {
-        String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendVideo";
+        //String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendVideo";
+        String url = API_TELEGRAM_BASE_URL + System.getenv("botBarzaiToken") + "/sendVideo";
         MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
         parts.add("chat_id", chatId);
         parts.add("video", videoUrl);
