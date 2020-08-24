@@ -14,8 +14,7 @@ public class TelegramApi {
     private RestTemplate restTemplate;
 
     public void sendMessageText(TelegramMessageTextRequest request) {
-        //String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendMessage";
-        String url = API_TELEGRAM_BASE_URL + System.getenv("botBarzaiToken") + "/sendMessage";
+        String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendMessage";
         System.out.println("I'm calling rest template on: " + url);
         restTemplate.postForObject(url, request, String.class);
     }
