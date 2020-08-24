@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.model;
+package io.botcrafting.botcraft.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

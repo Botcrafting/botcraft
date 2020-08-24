@@ -1,6 +1,9 @@
 package io.botcrafting.botcraft.model;
 
-import io.botcrafting.botcraft.model.service.api.MessageService;
+import io.botcrafting.botcraft.model.mapper.UpdateMapper;
+import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
+import io.botcrafting.botcraft.model.response.UpdateResponse;
+import io.botcrafting.botcraft.model.service.api.TelegramApi;
 import io.botcrafting.botcraft.model.service.handler.MessageHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +27,7 @@ public class MessagehandlerTest {
     private UpdateResponse telegramUpdate;
 
     @Mock
-    private MessageService messageService;
+    private TelegramApi telegramApi;
 
     @InjectMocks
     private MessageHandler messageHandler;
@@ -34,9 +37,10 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("botcraft", "E aí, Botcraft, beleza?", "BOTCRAFT",
                 "Top, botcraft"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessageText()).thenReturn(text);
-            messageHandler.handle(telegramUpdate);
-            verify(messageService, atLeastOnce()).sendMessageText("Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou.", 1);
+            when(telegramUpdate.getMessage().getText()).thenReturn(text);
+            messageHandler.handle(UpdateMapper.map(telegramUpdate));
+            //verify(messageService, atLeastOnce()).sendMessageText("Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou.", 1);
+            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou."));
         });
     }
 
@@ -45,9 +49,10 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("/ajuda", "/AJUDA",
                 "/Ajuda"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessageText()).thenReturn(text);
-            messageHandler.handle(telegramUpdate);
-            verify(messageService, atLeastOnce()).sendMessageText("Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.", 1);
+            when(telegramUpdate.getMessage().getText()).thenReturn(text);
+            messageHandler.handle(UpdateMapper.map(telegramUpdate));
+            //verify(messageService, atLeastOnce()).sendMessageText("Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.", 1);
+            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn."));
         });
     }
 }
