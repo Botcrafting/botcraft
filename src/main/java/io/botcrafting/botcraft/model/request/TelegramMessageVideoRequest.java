@@ -6,9 +6,6 @@ public class TelegramMessageVideoRequest {
     private @JsonProperty("chat_id") long chatId;
     private @JsonProperty("video") String video;
 
-    public TelegramMessageVideoRequest() {
-    }
-
     public TelegramMessageVideoRequest(long chatId, String video) {
         this.chatId = chatId;
         this.video = video;

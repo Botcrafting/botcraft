@@ -11,8 +11,7 @@ public class Chat {
     private String type;
     private Boolean allMembersAreAdministrators;
 
-    public Chat() {
-    }
+    public Chat() { }
 
     public long getId() {
         return id;

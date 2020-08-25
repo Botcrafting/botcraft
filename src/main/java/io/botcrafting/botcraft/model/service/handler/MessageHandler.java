@@ -19,7 +19,7 @@ public class MessageHandler {
     public void handle(Update telegramUpdate) {
         long chatId = telegramUpdate.getMessage().getChat().getId();
         String fullName = telegramUpdate.getMessage().getUser().getFirstName() + " " +  telegramUpdate.getMessage().getUser().getLastName();
-        if (telegramUpdate.getMessage().getText().toLowerCase().equals(COMMAND_HELP)) {
+        if (telegramUpdate.getMessage().getText().toLowerCase().contains(COMMAND_HELP)) {
             telegramApi.sendMessageText(new TelegramMessageTextRequest(chatId, CTHULHU_AWAKEN));
         } else if ((telegramUpdate.getMessage().getText().toLowerCase().equals(EASTER_EGG_HELLO_WORLD) ||
                 telegramUpdate.getMessage().getText().toLowerCase().contains(WORLD_CTHULHU)) &&

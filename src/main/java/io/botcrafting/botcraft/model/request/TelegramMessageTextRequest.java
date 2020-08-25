@@ -6,9 +6,6 @@ public class TelegramMessageTextRequest {
     private @JsonProperty("chat_id") long chatId;
     private @JsonProperty("text") String text;
 
-    public TelegramMessageTextRequest() {
-    }
-
     public TelegramMessageTextRequest(long chatId, String text) {
         this.chatId = chatId;
         this.text = text;
