@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.model;
+package io.botcrafting.botcraft.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,13 +9,38 @@ public class ChatResponse {
     private @JsonProperty("username") String userName;
     private String title;
     private String type;
-    private Boolean allMembersAreAdministrators;
 
     public ChatResponse(){}
 
     public long getId() {
         return id;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Boolean getAllMembersAreAdministrators() {
+        return allMembersAreAdministrators;
+    }
+
+    private Boolean allMembersAreAdministrators;
 
     public static final class Builder{
         private int id;

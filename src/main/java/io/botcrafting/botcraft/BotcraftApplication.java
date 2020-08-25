@@ -7,9 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class BotcraftApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BotcraftApplication.class, args);
 	}
-
 }

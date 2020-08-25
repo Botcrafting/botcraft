@@ -1,7 +1,9 @@
 package io.botcrafting.botcraft.model.service.handler;
 
-import io.botcrafting.botcraft.model.UpdateResponse;
-import io.botcrafting.botcraft.model.service.api.MessageService;
+import io.botcrafting.botcraft.model.Update;
+import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
+import io.botcrafting.botcraft.model.request.TelegramMessageVideoRequest;
+import io.botcrafting.botcraft.model.service.api.TelegramApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static io.botcrafting.botcraft.configuration.constant.CommandConstant.*;
@@ -12,26 +14,20 @@ import static io.botcrafting.botcraft.configuration.constant.UrlConstant.GIF_CTH
 public class MessageHandler {
 
     @Autowired(required = false)
-    private MessageService messageService;
+    private TelegramApi telegramApi;
 
-    public void handle(UpdateResponse telegramUpdateResponse) {
-        if (telegramUpdateResponse.getMessageText() != null) {
-            if (telegramUpdateResponse.getMessage() == null || telegramUpdateResponse.getMessage().getChat() == null) {
-                System.out.println("Message or Chat is null");
-                return;
-            }
-            long chatId = telegramUpdateResponse.getMessage().getChat().getId();
-            String fullName = telegramUpdateResponse.getMessage().getUser().getFirstName() + " " +  telegramUpdateResponse.getMessage().getUser().getLastName();
-            if (telegramUpdateResponse.getMessageText().toLowerCase().equals(COMMAND_HELP)) {
-                messageService.sendMessageText(CTHULHU_AWAKEN, chatId);
-            } else if ((telegramUpdateResponse.getMessageText().toLowerCase().equals(EASTER_EGG_HELLO_WORLD) ||
-                    telegramUpdateResponse.getMessageText().toLowerCase().contains(WORLD_CTHULHU)) &&
-                    !telegramUpdateResponse.getMessageText().toLowerCase().contains(COMMAND_HELP_EXCEPTION)
-            ) {
-                messageService.sendMessageVideo(GIF_CTHULHU, chatId);
-            } else if (telegramUpdateResponse.getMessageText().toLowerCase().contains(BOTCRAFT_NAME)) {
-                messageService.sendMessageText(String.format(ANSWER_BOTCRAFT_MENTION, fullName), chatId);
-            }
+    public void handle(Update telegramUpdate) {
+        long chatId = telegramUpdate.getMessage().getChat().getId();
+        String fullName = telegramUpdate.getMessage().getUser().getFirstName() + " " +  telegramUpdate.getMessage().getUser().getLastName();
+        if (telegramUpdate.getMessage().getText().toLowerCase().contains(COMMAND_HELP)) {
+            telegramApi.sendMessageText(new TelegramMessageTextRequest(chatId, CTHULHU_AWAKEN));
+        } else if ((telegramUpdate.getMessage().getText().toLowerCase().equals(EASTER_EGG_HELLO_WORLD) ||
+                telegramUpdate.getMessage().getText().toLowerCase().contains(WORLD_CTHULHU)) &&
+                !telegramUpdate.getMessage().getText().toLowerCase().contains(COMMAND_HELP_EXCEPTION)
+        ) {
+            telegramApi.sendMessageVideo(new TelegramMessageVideoRequest(chatId, GIF_CTHULHU));
+        } else if (telegramUpdate.getMessage().getText().toLowerCase().contains(BOTCRAFT_NAME)) {
+            telegramApi.sendMessageText(new TelegramMessageTextRequest(chatId, String.format(ANSWER_BOTCRAFT_MENTION, fullName)));
         }
     }
 }

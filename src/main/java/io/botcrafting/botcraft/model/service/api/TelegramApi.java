@@ -1,33 +1,27 @@
 package io.botcrafting.botcraft.model.service.api;
 
+import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
+import io.botcrafting.botcraft.model.request.TelegramMessageVideoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import static io.botcrafting.botcraft.configuration.constant.UrlConstant.API_TELEGRAM_BASE_URL;
 
 @Service
-public class MessageService {
+public class TelegramApi {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    public void sendMessageText(String text, long chatId) {
+    public void sendMessageText(TelegramMessageTextRequest request) {
         String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendMessage";
-        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
-        parts.add("chat_id", chatId);
-        parts.add("text", text);
         System.out.println("I'm calling rest template on: " + url);
-        restTemplate.postForObject(url, parts, String.class);
+        restTemplate.postForObject(url, request, String.class);
     }
 
-    public void sendMessageVideo(String videoUrl, long chatId) {
+    public void sendMessageVideo(TelegramMessageVideoRequest request) {
         String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendVideo";
-        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
-        parts.add("chat_id", chatId);
-        parts.add("video", videoUrl);
         System.out.println("I'm calling rest template on: " + url);
-        restTemplate.postForObject(url, parts, String.class);
+        restTemplate.postForObject(url, request, String.class);
     }
 }
