@@ -41,7 +41,7 @@ public class MessageHandler {
     }
 
     private void handleSearchBook(long chatId, String fullName, String message) {
-        String searchText = message.replace("/livro ", "");
+        String searchText = message.replace(COMMAND_SEARCH_BOOK + " ", "");
         if (!searchText.isBlank() && !searchText.isEmpty() && !searchText.equals(" ")) {
             try {
                 GoogleBooksVolumesResponse response = googleBooksApi.searchBook(new GoogleBooksSearchRequest(searchText));
