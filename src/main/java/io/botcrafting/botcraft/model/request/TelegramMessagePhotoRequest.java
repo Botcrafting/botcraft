@@ -3,14 +3,17 @@ package io.botcrafting.botcraft.model.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_PARSE_MODE_MARKDOWN;
 
-public class TelegramMessageTextRequest {
+public class TelegramMessagePhotoRequest {
     private @JsonProperty("chat_id") long chatId;
-    private @JsonProperty("text") String text;
+    private @JsonProperty("photo") String photo;
+    private @JsonProperty("caption") String caption;
     private @JsonProperty("parse_mode") String parseMode;
 
-    public TelegramMessageTextRequest(long chatId, String text) {
+
+    public TelegramMessagePhotoRequest(long chatId, String photo, String caption) {
         this.chatId = chatId;
-        this.text = text;
+        this.photo = photo;
+        this.caption = caption;
         this.parseMode = VALUE_PARSE_MODE_MARKDOWN;
     }
 
@@ -22,12 +25,20 @@ public class TelegramMessageTextRequest {
         this.chatId = chatId;
     }
 
-    public String getText() {
-        return text;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public String getParseMode() {

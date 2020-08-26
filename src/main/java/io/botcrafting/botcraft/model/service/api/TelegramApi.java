@@ -1,5 +1,6 @@
 package io.botcrafting.botcraft.model.service.api;
 
+import io.botcrafting.botcraft.model.request.TelegramMessagePhotoRequest;
 import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
 import io.botcrafting.botcraft.model.request.TelegramMessageVideoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class TelegramApi {
 
     public void sendMessageVideo(TelegramMessageVideoRequest request) {
         String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendVideo";
+        System.out.println("I'm calling rest template on: " + url);
+        restTemplate.postForObject(url, request, String.class);
+    }
+
+    public void sendMessagePhoto(TelegramMessagePhotoRequest request) {
+        String url = API_TELEGRAM_BASE_URL + System.getenv("botToken") + "/sendPhoto";
         System.out.println("I'm calling rest template on: " + url);
         restTemplate.postForObject(url, request, String.class);
     }
