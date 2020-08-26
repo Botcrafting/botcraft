@@ -61,6 +61,7 @@ public class MessageHandler {
                     telegramApi.sendMessageText(new TelegramMessageTextRequest(chatId, String.format(ANSWER_NO_BOOK_FOUND, fullName)));
                 }
             } catch (Exception ex) {
+                ex.printStackTrace();
                 telegramApi.sendMessageText(new TelegramMessageTextRequest(chatId, String.format(ANSWER_ERROR_SEARCH_BOOK, fullName)));
             }
         } else {
