@@ -68,17 +68,21 @@ public class BookMapper {
                 if (currentIsbn.getType() != null) {
                     if (currentIsbn.getType().equals(VALUE_TYPE_ISBN_13)) {
                         var currentIsbnIdentifier = currentIsbn.getIdentifier();
-                        isbn13 = (currentIsbnIdentifier != null) ? String.format("%s-%s-%s-%s",
-                                currentIsbnIdentifier.charAt(0),
-                                currentIsbnIdentifier.substring(1, 1 + 3),
-                                currentIsbnIdentifier.substring(4, 4 + 5),
-                                currentIsbnIdentifier.charAt(9)) : "";
+                        isbn13 = (currentIsbnIdentifier != null) ? formatIsbn13(currentIsbnIdentifier) : "";
                         break;
                     }
                 }
             }
         }
         return isbn13;
+    }
+
+    private static String formatIsbn13(String currentIsbnIdentifier) {
+        return String.format("%s-%s-%s-%s",
+                currentIsbnIdentifier.charAt(0),
+                currentIsbnIdentifier.substring(1, 1 + 3),
+                currentIsbnIdentifier.substring(4, 4 + 5),
+                currentIsbnIdentifier.charAt(9));
     }
 
     private static String mapImageUrl(GoogleBooksVolumeInfoResponse book) {
