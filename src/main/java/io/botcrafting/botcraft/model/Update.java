@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.model;
 
-import org.springframework.lang.NonNull;
-
 public class Update {
     private int id;
     private Message message;
@@ -20,7 +18,6 @@ public class Update {
         return message;
     }
 
-    @NonNull
     public void setMessage(Message message) {
         this.message = message;
     }

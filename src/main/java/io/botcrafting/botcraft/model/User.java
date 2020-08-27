@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.model;
 
-import org.springframework.lang.NonNull;
-
 public class User {
     private int id;
     private Boolean isBot;
@@ -24,7 +22,6 @@ public class User {
         return isBot;
     }
 
-    @NonNull
     public void setBot(Boolean bot) {
         isBot = bot;
     }
@@ -33,7 +30,6 @@ public class User {
         return firstName;
     }
 
-    @NonNull
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -42,7 +38,6 @@ public class User {
         return lastName;
     }
 
-    @NonNull
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -51,7 +46,6 @@ public class User {
         return userName;
     }
 
-    @NonNull
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -60,7 +54,6 @@ public class User {
         return languageCode;
     }
 
-    @NonNull
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
     }

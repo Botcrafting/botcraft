@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.model;
 
-import org.springframework.lang.NonNull;
-
 public class Book {
     private String id;
     private String title;
@@ -19,7 +17,6 @@ public class Book {
         return id;
     }
 
-    @NonNull
     public void setId(String id) {
         this.id = id;
     }
@@ -28,7 +25,6 @@ public class Book {
         return title;
     }
 
-    @NonNull
     public void setTitle(String title) {
         this.title = title;
     }
@@ -37,7 +33,6 @@ public class Book {
         return description;
     }
 
-    @NonNull
     public void setDescription(String description) {
         this.description = description;
     }
@@ -46,7 +41,6 @@ public class Book {
         return isbn13;
     }
 
-    @NonNull
     public void setIsbn13(String isbn13) {
         this.isbn13 = isbn13;
     }
@@ -55,7 +49,6 @@ public class Book {
         return isbn10;
     }
 
-    @NonNull
     public void setIsbn10(String isbn10) {
         this.isbn10 = isbn10;
     }
@@ -64,7 +57,6 @@ public class Book {
         return imageUrl;
     }
 
-    @NonNull
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
@@ -73,7 +65,6 @@ public class Book {
         return author;
     }
 
-    @NonNull
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -82,7 +73,6 @@ public class Book {
         return publisher;
     }
 
-    @NonNull
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
@@ -91,7 +81,6 @@ public class Book {
         return publishDate;
     }
 
-    @NonNull
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }

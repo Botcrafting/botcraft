@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GoogleBooksItemResponse {
     private @JsonProperty("id") String id;
-    private @JsonProperty("volumeInfo")
-    GoogleBooksVolumeInfoResponse book;
+    private @JsonProperty("volumeInfo") GoogleBooksVolumeInfoResponse book;
 
     public GoogleBooksItemResponse() {
     }
@@ -20,9 +19,5 @@ public class GoogleBooksItemResponse {
 
     public GoogleBooksVolumeInfoResponse getBook() {
         return book;
-    }
-
-    public void setBook(GoogleBooksVolumeInfoResponse book) {
-        this.book = book;
     }
 }

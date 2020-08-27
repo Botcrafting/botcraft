@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.model;
 
-import org.springframework.lang.NonNull;
-
 public class Chat {
     private long id;
     private String firstName;
@@ -25,7 +23,6 @@ public class Chat {
         return firstName;
     }
 
-    @NonNull
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -34,7 +31,6 @@ public class Chat {
         return lastName;
     }
 
-    @NonNull
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -43,7 +39,6 @@ public class Chat {
         return userName;
     }
 
-    @NonNull
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -52,7 +47,6 @@ public class Chat {
         return title;
     }
 
-    @NonNull
     public void setTitle(String title) {
         this.title = title;
     }
@@ -61,7 +55,6 @@ public class Chat {
         return type;
     }
 
-    @NonNull
     public void setType(String type) {
         this.type = type;
     }
@@ -70,7 +63,6 @@ public class Chat {
         return allMembersAreAdministrators;
     }
 
-    @NonNull
     public void setAllMembersAreAdministrators(Boolean allMembersAreAdministrators) {
         this.allMembersAreAdministrators = allMembersAreAdministrators;
     }
