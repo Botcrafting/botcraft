@@ -3,9 +3,13 @@ package io.botcrafting.botcraft.model.mapper;
 import io.botcrafting.botcraft.model.Book;
 import io.botcrafting.botcraft.model.response.GoogleBooks.GoogleBooksItemResponse;
 import io.botcrafting.botcraft.model.response.GoogleBooks.GoogleBooksVolumeInfoResponse;
+import org.springframework.lang.NonNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAFT_API_BASE_IMAGES_URL;
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_TYPE_ISBN_10;
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_TYPE_ISBN_13;
 
@@ -24,6 +28,7 @@ public class BookMapper {
         return book;
     }
 
+    @NonNull
     private static String mapPublishDate(GoogleBooksVolumeInfoResponse book) {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat newFormatDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -40,10 +45,12 @@ public class BookMapper {
         return publishDateText;
     }
 
+    @NonNull
     private static String mapPublisher(GoogleBooksVolumeInfoResponse book) {
         return (book.getPublisher() != null) ? book.getPublisher() : "";
     }
 
+    @NonNull
     private static String mapIsbn10(GoogleBooksVolumeInfoResponse book) {
         String isbn10 = "";
         if (book.getIsbnList() != null) {
@@ -60,6 +67,7 @@ public class BookMapper {
         return isbn10;
     }
 
+    @NonNull
     private static String mapIsbn13(GoogleBooksVolumeInfoResponse bookResponse) {
         String isbn13 = "";
         if (bookResponse.getIsbnList() != null) {
@@ -77,30 +85,33 @@ public class BookMapper {
         return isbn13;
     }
 
+    @NonNull
     private static String formatIsbn13(String currentIsbnIdentifier) {
-        return String.format("%s-%s-%s-%s",
-                currentIsbnIdentifier.charAt(0),
-                currentIsbnIdentifier.substring(1, 1 + 3),
-                currentIsbnIdentifier.substring(4, 4 + 5),
-                currentIsbnIdentifier.charAt(9));
+        return String.format("%s-%s", currentIsbnIdentifier.substring(0, 3), currentIsbnIdentifier.substring(3));
     }
 
+    @NonNull
     private static String mapImageUrl(GoogleBooksVolumeInfoResponse book) {
-        String imageUrl = "";
+        String imageUrl;
         if(book.getImageLink() != null) {
-            imageUrl = (book.getImageLink().getThumbnail() != null) ? book.getImageLink().getThumbnail() + "&fife=w600-h800" : "";
+            imageUrl = (book.getImageLink().getThumbnail() != null) ? String.format("%s%s", book.getImageLink().getThumbnail(), "&fife=w600-h800") : "";
+        } else {
+            imageUrl = String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "no_image_book.jpeg");
         }
         return imageUrl;
     }
 
+    @NonNull
     private static String mapTitle(GoogleBooksVolumeInfoResponse book) {
         return (book.getTitle() != null) ? book.getTitle() : "";
     }
 
+    @NonNull
     private static String mapDescription(GoogleBooksVolumeInfoResponse book) {
         return (book.getDescription() != null) ? book.getDescription() : "";
     }
 
+    @NonNull
     private static String mapAuthor(GoogleBooksVolumeInfoResponse book) {
         StringBuilder author = new StringBuilder();
         if (book.getAuthorList() != null) {

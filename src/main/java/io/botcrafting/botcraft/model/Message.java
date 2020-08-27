@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.model;
 
-import org.springframework.lang.NonNull;
-
 public class Message {
     private User user;
     private Chat chat;
@@ -15,7 +13,6 @@ public class Message {
         return user;
     }
 
-    @NonNull
     public void setUser(User user) {
         this.user = user;
     }
@@ -24,7 +21,6 @@ public class Message {
         return chat;
     }
 
-    @NonNull
     public void setChat(Chat chat) {
         this.chat = chat;
     }
@@ -45,12 +41,10 @@ public class Message {
         this.date = date;
     }
 
-    @NonNull
     public String getText() {
         return text;
     }
 
-    @NonNull
     public void setText(String text) {
         this.text = text;
     }

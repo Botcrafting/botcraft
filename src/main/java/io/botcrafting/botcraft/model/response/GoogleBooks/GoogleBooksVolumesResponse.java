@@ -10,19 +10,7 @@ public class GoogleBooksVolumesResponse {
 
     public GoogleBooksVolumesResponse() { }
 
-    public int getTotalItems() {
-        return totalItems;
-    }
-
-    public void setTotalItems(int totalItems) {
-        this.totalItems = totalItems;
-    }
-
     public ArrayList<GoogleBooksItemResponse> getItemList() {
         return itemList;
-    }
-
-    public void setItemList(ArrayList<GoogleBooksItemResponse> itemList) {
-        this.itemList = itemList;
     }
 }
