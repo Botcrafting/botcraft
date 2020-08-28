@@ -8,7 +8,7 @@ public class UpdateMapper {
     public static Update map(UpdateResponse response) {
         Update update = new Update();
         update.setId(response.getUpdateId());
-        update.setMessage((response.getMessage() != null) ? MessageMapper.map(response.getMessage()) : new Message());
+        update.setMessage((response.getMessage() != null) ? MessageMapper.map(response.getMessage()) : MessageMapper.map(new Message()));
         return update;
     }
 }
