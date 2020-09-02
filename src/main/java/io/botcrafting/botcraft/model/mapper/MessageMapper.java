@@ -11,8 +11,8 @@ public class MessageMapper {
         message.setId(response.getMessageId());
         message.setText((response.getText() != null) ? response.getText() : "");
         message.setDate(response.getDate());
-        message.setChat((response.getChat() != null) ? ChatMapper.map(response.getChat()) : new Chat());
-        message.setUser((response.getUser() != null) ? UserMapper.map(response.getUser()) : new User());
+        message.setChat((response.getChatResponse() != null) ? ChatMapper.map(response.getChatResponse()) : new Chat());
+        message.setUser((response.getUserResponse() != null) ? UserMapper.map(response.getUserResponse()) : new User());
         return message;
     }
 }

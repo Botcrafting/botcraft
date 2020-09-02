@@ -6,7 +6,7 @@ import io.botcrafting.botcraft.model.response.UserResponse;
 public class UserMapper {
     public static User map(UserResponse response) {
         User user = new User();
-        user.setBot((response.getBot() != null) ? response.getBot() : false);
+        user.setIsBot((response.getIsBot() != null) ? response.getIsBot() : false);
         user.setFirstName((response.getFirstName() != null) ? response.getFirstName() : "");
         user.setUserName((response.getUserName() != null) ? response.getUserName() : "");
         user.setLastName((response.getLastName() != null) ? response.getLastName() : "");

@@ -37,7 +37,7 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("botcraft", "E aí, Botcraft, beleza?", "BOTCRAFT",
                 "Top, botcraft"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessage().getText()).thenReturn(text);
+            when(telegramUpdate.getMessageResponse().getText()).thenReturn(text);
             messageHandler.handle(UpdateMapper.map(telegramUpdate));
             //verify(messageService, atLeastOnce()).sendMessageText("Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou.", 1);
             verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou."));
@@ -49,7 +49,7 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("/ajuda", "/AJUDA",
                 "/Ajuda"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessage().getText()).thenReturn(text);
+            when(telegramUpdate.getMessageResponse().getText()).thenReturn(text);
             messageHandler.handle(UpdateMapper.map(telegramUpdate));
             //verify(messageService, atLeastOnce()).sendMessageText("Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.", 1);
             verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn."));

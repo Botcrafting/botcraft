@@ -1,6 +1,7 @@
 package io.botcrafting.botcraft.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_PARSE_MODE_MARKDOWN;
 
 public class TelegramMessageTextRequest {
