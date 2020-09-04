@@ -1,8 +1,9 @@
 package io.botcrafting.botcraft.controller;
 
-import io.botcrafting.botcraft.controller.message.MessageController;
-import io.botcrafting.botcraft.model.response.UpdateResponse;
-import io.botcrafting.botcraft.model.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.infra.controller.message.MessageController;
+import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class MessageControllerTest {
     private MessageController messageController;
 
     @MockBean
-    private UpdateResponse telegramUpdate;
+    private TelegramUpdateReceived telegramUpdate;
 
 
     @Test

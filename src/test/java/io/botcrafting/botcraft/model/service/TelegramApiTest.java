@@ -1,8 +1,9 @@
 package io.botcrafting.botcraft.model.service;
 
-import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
-import io.botcrafting.botcraft.model.service.api.TelegramApi;
-import io.botcrafting.botcraft.model.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.infra.service.api.telegram.TelegramApi;
+import io.botcrafting.botcraft.infra.telegram.outbound.TelegramMessageText;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,7 +38,7 @@ public class TelegramApiTest {
                 "https://media1.tenor.com/images/1701ca955ab813437e4457667c980123/tenor.gif?itemid=12528285",
                 "https://media.giphy.com/media/jlfulL2NK1D2M/giphy.gif", "That's obvious, it's 42!!!"));
         responses.forEach(response -> {
-            telegramApi.sendMessageText(new TelegramMessageTextRequest(608316978, response));
+            telegramApi.sendMessageText(new TelegramMessageText(608316978, response));
             //String url = "https://api.telegram.org/bot" + System.getenv("botToken") + "/sendMessage";
             String url = "https://api.telegram.org/bot" + System.getenv("botBarzaiToken") + "/sendMessage";
             MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();

@@ -1,10 +1,11 @@
 package io.botcrafting.botcraft.model;
 
-import io.botcrafting.botcraft.model.mapper.UpdateMapper;
-import io.botcrafting.botcraft.model.request.TelegramMessageTextRequest;
-import io.botcrafting.botcraft.model.response.UpdateResponse;
-import io.botcrafting.botcraft.model.service.api.TelegramApi;
-import io.botcrafting.botcraft.model.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.infra.mapper.UpdateMapper;
+import io.botcrafting.botcraft.infra.service.api.telegram.TelegramApi;
+import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
+import io.botcrafting.botcraft.infra.telegram.outbound.TelegramMessageText;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.atLeastO
 @SpringBootTest
 public class MessagehandlerTest {
     @Mock
-    private UpdateResponse telegramUpdate;
+    private TelegramUpdateReceived telegramUpdate;
 
     @Mock
     private TelegramApi telegramApi;
@@ -37,10 +38,10 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("botcraft", "E aí, Botcraft, beleza?", "BOTCRAFT",
                 "Top, botcraft"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessageResponse().getText()).thenReturn(text);
+            when(telegramUpdate.getReceivedMessage().getText()).thenReturn(text);
             messageHandler.handle(UpdateMapper.map(telegramUpdate));
             //verify(messageService, atLeastOnce()).sendMessageText("Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou.", 1);
-            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou."));
+            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageText(1, "Você é um mero mortal, test. Como ousa chamar o meu nome? Minha hora ainda não chegou."));
         });
     }
 
@@ -49,10 +50,10 @@ public class MessagehandlerTest {
         List<String> texts = new ArrayList<>(Arrays.asList("/ajuda", "/AJUDA",
                 "/Ajuda"));
         texts.forEach(text -> {
-            when(telegramUpdate.getMessageResponse().getText()).thenReturn(text);
+            when(telegramUpdate.getReceivedMessage().getText()).thenReturn(text);
             messageHandler.handle(UpdateMapper.map(telegramUpdate));
             //verify(messageService, atLeastOnce()).sendMessageText("Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.", 1);
-            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageTextRequest(1, "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn."));
+            verify(telegramApi, atLeastOnce()).sendMessageText(new TelegramMessageText(1, "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn."));
         });
     }
 }
