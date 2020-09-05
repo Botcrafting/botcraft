@@ -1,11 +1,15 @@
 package io.botcrafting.botcraft.infra.controller.message;
 
-import io.botcrafting.botcraft.core.service.handler.MessageHandler;
-import io.botcrafting.botcraft.infra.mapper.UpdateMapper;
-import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
+import io.botcrafting.botcraft.infra.telegram.mapper.MessageMapper;
 
 @RestController
 public class MessageController {
@@ -16,7 +20,7 @@ public class MessageController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String receiveTelegramUpdate(@RequestBody TelegramUpdateReceived telegramUpdateReceived){
-        messageHandler.handle(UpdateMapper.map(telegramUpdateReceived));
+        messageHandler.handle(MessageMapper.map(telegramUpdateReceived.getReceivedMessage()));
         return "OK";
     }
 

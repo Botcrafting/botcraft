@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Message {
     private User user;
-    private Chat chat;
-    private int id;
+    private long chatId;
     private int date;
     private String text;
 }
