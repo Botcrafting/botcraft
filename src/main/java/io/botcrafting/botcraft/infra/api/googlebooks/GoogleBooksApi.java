@@ -11,8 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.core.service.BookService;
 import io.botcrafting.botcraft.infra.googlebooks.inbound.GoogleBooksVolumes;
+import io.botcrafting.botcraft.infra.googlebooks.mapper.BookMapper;
 import io.botcrafting.botcraft.infra.googlebooks.outbound.GoogleBooksSearchRequest;
-import io.botcrafting.botcraft.infra.telegram.mapper.BookMapper;
 
 @Service
 public class GoogleBooksApi implements BookService{

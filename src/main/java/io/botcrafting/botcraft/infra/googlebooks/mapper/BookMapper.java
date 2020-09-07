@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.infra.telegram.mapper;
+package io.botcrafting.botcraft.infra.googlebooks.mapper;
 
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.infra.googlebooks.inbound.GoogleBooksItem;

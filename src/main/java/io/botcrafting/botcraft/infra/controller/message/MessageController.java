@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.botcrafting.botcraft.core.handler.MessageHandler;
+import io.botcrafting.botcraft.infra.telegram.inbound.TelegramMessage;
 import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
-import io.botcrafting.botcraft.infra.telegram.mapper.MessageMapper;
 
 @RestController
 public class MessageController {
@@ -20,7 +20,7 @@ public class MessageController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String receiveTelegramUpdate(@RequestBody TelegramUpdateReceived telegramUpdateReceived){
-        messageHandler.handle(MessageMapper.map(telegramUpdateReceived.getReceivedMessage()));
+        messageHandler.handle(TelegramMessage.toCoreMessage(telegramUpdateReceived.getReceivedMessage()));
         return "OK";
     }
 
