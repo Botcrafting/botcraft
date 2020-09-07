@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.handler.MessageHandler;
 import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 import io.botcrafting.botcraft.infra.telegram.mapper.MessageMapper;
 

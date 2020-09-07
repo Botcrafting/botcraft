@@ -22,7 +22,7 @@ public class GoogleBooksApi implements BookService{
 
 
 	@Override
-	public Optional<Book> searchBook(long chatId, String fullName, String message, String searchText) {
+	public Optional<Book> searchBook(long chatId, String fullName, String searchText) {
 		Book book = null;
 		GoogleBooksVolumes response = searchBookAtGoogleApi(new GoogleBooksSearchRequest(searchText));
         if (response != null && response.getItemList() != null && response.getItemList().size() > 0) {

@@ -1,6 +1,6 @@
 package io.botcrafting.botcraft.controller;
 
-import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.handler.MessageHandler;
 import io.botcrafting.botcraft.infra.controller.message.MessageController;
 import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 

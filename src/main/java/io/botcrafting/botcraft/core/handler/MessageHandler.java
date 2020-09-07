@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.core.service.handler;
+package io.botcrafting.botcraft.core.handler;
 
 import static io.botcrafting.botcraft.configuration.constant.CommandConstant.COMMAND_EASTER_EGG_LIST;
 import static io.botcrafting.botcraft.configuration.constant.CommandConstant.COMMAND_HELP;
@@ -91,7 +91,7 @@ public class MessageHandler {
         String searchText = message.replace(COMMAND_SEARCH_BOOK, "").replace("-", "");
         if (!searchText.isBlank() && !searchText.isEmpty() && !searchText.equals(" ")) {
             try {
-            		Optional<Book> foundBook = bookService.searchBook(chatId, fullName, message, searchText);
+            		Optional<Book> foundBook = bookService.searchBook(chatId, fullName, searchText);
 	            	StringBuilder bookMessage = new StringBuilder();
 	            	if(!foundBook.isEmpty()) {
 	            	Book book = foundBook.get();

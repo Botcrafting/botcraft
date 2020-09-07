@@ -6,7 +6,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import io.botcrafting.botcraft.core.service.handler.MessageHandler;
+import io.botcrafting.botcraft.core.handler.MessageHandler;
 import io.botcrafting.botcraft.infra.api.telegram.TelegramApi;
 import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 
