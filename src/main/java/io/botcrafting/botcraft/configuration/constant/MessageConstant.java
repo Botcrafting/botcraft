@@ -2,7 +2,7 @@ package io.botcrafting.botcraft.configuration.constant;
 
 public class MessageConstant {
     public static String CTHULHU_AWAKEN = "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.";
-    public static String WORLD_CTHULHU = "cthulhu";
+    public static String WORD_CTHULHU = "cthulhu";
     public static String BOTCRAFT_NAME = "botcraft";
     public static String QUESTION_IS_GOING_TO_RAIN = "vai chover hoje";
     public static String ANSWER_IS_GOING_TO_RAIN = "*%s*... Ô se vai!!";

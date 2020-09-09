@@ -15,7 +15,7 @@ import io.botcrafting.botcraft.infra.googlebooks.mapper.BookMapper;
 import io.botcrafting.botcraft.infra.googlebooks.outbound.GoogleBooksSearchRequest;
 
 @Service
-public class GoogleBooksApi implements BookService{
+public class GoogleBooksApi implements BookService {
 
     @Autowired
     private RestTemplate restTemplate;
