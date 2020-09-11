@@ -6,18 +6,18 @@ import static io.botcrafting.botcraft.configuration.constant.MessageConstant.EAS
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.botcrafting.botcraft.core.handler.chain.Chain;
+import io.botcrafting.botcraft.core.handler.chain.MessageChain;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
 public class EasterEggListCommand implements MessageProcessor{
 	
-	private Chain chain;
+	private MessageChain chain;
 	private MessageSenderService service;
 	
 	@Autowired
-	public EasterEggListCommand(Chain chain, MessageSenderService service) {
+	public EasterEggListCommand(MessageChain chain, MessageSenderService service) {
 		this.chain = chain;
 		this.service = service;
 		chain.registerProcessor(this);

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.botcrafting.botcraft.configuration.constant.MessageConstant;
-import io.botcrafting.botcraft.core.handler.chain.Chain;
+import io.botcrafting.botcraft.core.handler.chain.MessageChain;
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.BookService;
@@ -22,12 +22,12 @@ import io.botcrafting.botcraft.core.service.MessageSenderService;
 public class SearchBookCommand implements MessageProcessor{
 
 	
-	private Chain chain;
+	private MessageChain chain;
 	private MessageSenderService msgService;
 	private BookService bookService;
 
 	@Autowired
-	public SearchBookCommand(Chain chain, MessageSenderService msgService, BookService bookService) {
+	public SearchBookCommand(MessageChain chain, MessageSenderService msgService, BookService bookService) {
 		this.chain = chain;
 		this.msgService = msgService;
 		this.bookService = bookService;

@@ -9,7 +9,7 @@ import io.botcrafting.botcraft.core.handler.processors.MessageProcessor;
 import io.botcrafting.botcraft.core.model.Message;
 
 @Component
-public class Chain {
+public class MessageChain {
 	private List<MessageProcessor> processors =  new ArrayList<>();
 	
 	public void registerProcessor(MessageProcessor processor) {

@@ -7,18 +7,18 @@ import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAF
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.botcrafting.botcraft.core.handler.chain.Chain;
+import io.botcrafting.botcraft.core.handler.chain.MessageChain;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
 public class EasterEggCthulhuAwake implements MessageProcessor{
 
-	private Chain chain;
+	private MessageChain chain;
 	private MessageSenderService service;
 
 	@Autowired
-	public EasterEggCthulhuAwake(Chain chain, MessageSenderService service) {
+	public EasterEggCthulhuAwake(MessageChain chain, MessageSenderService service) {
 		this.chain = chain;
 		this.service = service;
 		chain.registerProcessor(this);
