@@ -15,6 +15,9 @@ public class MessageConstant {
             "Para buscar um livro você precisa digitar o que deseja encontrar.\n" +
             "Por exemplo: \"/livro Os Miseráveis\".\n\n" +
             "Tente novamente, por favor.";
+    public static String FOR_THE_HORDE = "pela horda";
+    public static String KILLING_MONSTERS = "matando monstros";
+    public static String LETS_PARTY = "festa";
     public static String ANSWER_NO_BOOK_FOUND = "Perdão, *%s*. Não encontrei o livro que busca.";
     public static String ANSWER_ERROR_SEARCH_BOOK = "Perdão, *%s*. Tive um problema em encontrar o livro que busca. Tente procurá-lo mais tarde, por favor.";
     public static String ANSWER_BOOK_FOUND = "Encontrei o que procura, *%s*. Este é o resultado mais relevante, veja:";

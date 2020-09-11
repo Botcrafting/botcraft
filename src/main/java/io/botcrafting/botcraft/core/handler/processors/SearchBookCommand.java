@@ -8,57 +8,71 @@ import static io.botcrafting.botcraft.configuration.constant.MessageConstant.DES
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import io.botcrafting.botcraft.configuration.constant.MessageConstant;
+import io.botcrafting.botcraft.core.handler.chain.Chain;
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.BookService;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
-public class CommandSearchBook extends MessageProcessor{
+@Component
+public class SearchBookCommand implements MessageProcessor{
 
-	public CommandSearchBook(Message message, MessageSenderService msgService, BookService bookService) {
-		super(message, msgService, bookService);
+	
+	private Chain chain;
+	private MessageSenderService msgService;
+	private BookService bookService;
+
+	@Autowired
+	public SearchBookCommand(Chain chain, MessageSenderService msgService, BookService bookService) {
+		this.chain = chain;
+		this.msgService = msgService;
+		this.bookService = bookService;
+		chain.registerProcessor(this);
 	}
 
 	@Override
-	public void processMessage() {
-		if(text.startsWith("/") && text.contains(COMMAND_SEARCH_BOOK)) {
-			processBookComand(message.getChatId(), this.fullName, message.getText());
-			return;
+	public boolean processMessage(Message message) {
+		if(message.getLoweredText().startsWith("/") && message.getLoweredText().contains(COMMAND_SEARCH_BOOK)) {
+			processBookComand(message);
+			return true;
 		}
-		nextProcessor.processMessage();
+		return false;
 	}
 	
-	private void processBookComand(long chatId, String fullName, String message) {
-        String searchText = message.replace(COMMAND_SEARCH_BOOK, "").replace("-", "");
+	private void processBookComand(Message message) {
+        String searchText = message.getText().replace(COMMAND_SEARCH_BOOK, "").replace("-", "");
         if(searchText.isBlank() || searchText.isEmpty() || searchText.equals(" ")) {
-        	handleEmptyCommand();
+        	handleEmptyCommand(message);
         	return;
         }
         if (!searchText.isBlank() && !searchText.isEmpty() && !searchText.equals(" ")) {
             try {
-            		Optional<Book> foundBook = searchBook(chatId, fullName, searchText);
+            		Optional<Book> foundBook = searchBook(message.getChatId(), message.getFullName(), searchText);
 	            	if(!foundBook.isEmpty()) {
 		            	String bookAnswerMessage = createBookAnswerMessage(foundBook.get());
-		                msgService.sendMessageText(chatId, String.format(ANSWER_BOOK_FOUND, fullName));
-	                    msgService.sendPhoto(chatId, foundBook.get().getImageUrl(), bookAnswerMessage);
-	                    msgService.sendMessageText(chatId, String.format(DESCRIPTION_BOOK, foundBook.get().getDescription()));
+		                msgService.sendMessageText(message.getChatId(), String.format(ANSWER_BOOK_FOUND, message.getFullName()));
+	                    msgService.sendPhoto(message.getChatId(), foundBook.get().getImageUrl(), bookAnswerMessage);
+	                    msgService.sendMessageText(message.getChatId(), String.format(DESCRIPTION_BOOK, foundBook.get().getDescription()));
 	                    return;
 	                } 
-	            	handleBookNotFound();
+	            	handleBookNotFound(message);
             } catch (Exception ex) {
                 ex.printStackTrace();
-                msgService.sendMessageText(chatId, String.format(MessageConstant.ANSWER_ERROR_SEARCH_BOOK, fullName));
+                msgService.sendMessageText(message.getChatId(), String.format(MessageConstant.ANSWER_ERROR_SEARCH_BOOK, message.getFullName()));
             }
         }
     }
 	
-	private void handleEmptyCommand() {
-		msgService.sendMessageText(message.getChatId(), String.format(ANSWER_EMPTY_SEARCH, fullName));
+	private void handleEmptyCommand(Message message) {
+		msgService.sendMessageText(message.getChatId(), String.format(ANSWER_EMPTY_SEARCH, message.getFullName()));
 	}
 	
-	private void handleBookNotFound() {
-		msgService.sendMessageText(message.getChatId(), String.format(ANSWER_NO_BOOK_FOUND, fullName));
+	private void handleBookNotFound(Message message) {
+		msgService.sendMessageText(message.getChatId(), String.format(ANSWER_NO_BOOK_FOUND, message.getFullName()));
 	}
 	
 	private Optional<Book> searchBook(long chatId, String fullName, String searchText) {

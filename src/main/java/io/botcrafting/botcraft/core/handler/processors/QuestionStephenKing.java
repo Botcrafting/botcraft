@@ -5,23 +5,33 @@ import static io.botcrafting.botcraft.configuration.constant.MessageConstant.BOT
 import static io.botcrafting.botcraft.configuration.constant.MessageConstant.QUESTION_STEPHEN_KING;
 import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAFT_API_BASE_IMAGES_URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import io.botcrafting.botcraft.core.handler.chain.Chain;
 import io.botcrafting.botcraft.core.model.Message;
-import io.botcrafting.botcraft.core.service.BookService;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
-public class QuestionStephenKing extends MessageProcessor{
+@Component
+public class QuestionStephenKing implements MessageProcessor{
 	
-	public QuestionStephenKing(Message message, MessageSenderService msgService, BookService bookService) {
-		super(message, msgService, bookService);
+	private Chain chain;
+	private MessageSenderService service;
+
+	@Autowired
+	public QuestionStephenKing(Chain chain, MessageSenderService service) {
+		this.chain = chain;
+		this.service = service;
+		chain.registerProcessor(this);
 	}
 
 	@Override
-	public void processMessage() {
-		if (text.contains(BOTCRAFT_NAME) && text.contains(QUESTION_STEPHEN_KING)) {
-			msgService.sendPhoto(message.getChatId(), String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "sk_works.jpg"), String.format(ANSWER_STEPHEN_KING, fullName));
-            return;
+	public boolean processMessage(Message message) {
+		if (message.getLoweredText().contains(BOTCRAFT_NAME) && message.getLoweredText().contains(QUESTION_STEPHEN_KING)) {
+			service.sendPhoto(message.getChatId(), String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "sk_works.jpg"), String.format(ANSWER_STEPHEN_KING, message.getFullName()));
+            return true;
         }
-		nextProcessor.processMessage();
+		return false;
 	}
 
 }

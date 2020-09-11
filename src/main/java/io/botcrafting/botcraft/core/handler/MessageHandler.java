@@ -13,6 +13,6 @@ public class MessageHandler {
 	Chain chain;
 
     public void handle(Message message) {
-        chain.buildChain(message).processMessage();
+        chain.processMessage(message);
     }
 }
