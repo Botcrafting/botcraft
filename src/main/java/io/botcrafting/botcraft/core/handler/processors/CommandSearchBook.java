@@ -1,7 +1,5 @@
 package io.botcrafting.botcraft.core.handler.processors;
 
-import io.botcrafting.botcraft.core.model.Book;
-import io.botcrafting.botcraft.core.model.Message;
 import static io.botcrafting.botcraft.configuration.constant.CommandConstant.COMMAND_SEARCH_BOOK;
 import static io.botcrafting.botcraft.configuration.constant.MessageConstant.ANSWER_BOOK_FOUND;
 import static io.botcrafting.botcraft.configuration.constant.MessageConstant.ANSWER_EMPTY_SEARCH;
@@ -11,16 +9,20 @@ import static io.botcrafting.botcraft.configuration.constant.MessageConstant.DES
 import java.util.Optional;
 
 import io.botcrafting.botcraft.configuration.constant.MessageConstant;
+import io.botcrafting.botcraft.core.model.Book;
+import io.botcrafting.botcraft.core.model.Message;
+import io.botcrafting.botcraft.core.service.BookService;
+import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 public class CommandSearchBook extends MessageProcessor{
 
-	public CommandSearchBook(Message message) {
-		super(message);
+	public CommandSearchBook(Message message, MessageSenderService msgService, BookService bookService) {
+		super(message, msgService, bookService);
 	}
 
 	@Override
 	public void processMessage() {
-		if(message.getText().startsWith("/") && message.getText().contains(COMMAND_SEARCH_BOOK)) {
+		if(text.startsWith("/") && text.contains(COMMAND_SEARCH_BOOK)) {
 			processBookComand(message.getChatId(), this.fullName, message.getText());
 			return;
 		}

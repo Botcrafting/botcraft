@@ -19,7 +19,7 @@ public class TelegramMessage {
     
     public static Message toCoreMessage(TelegramMessage telegramReceivedMessage) {
         Message message = new Message();
-        message.setText((telegramReceivedMessage.getText() != null) ? telegramReceivedMessage.getText() : "");
+    	message.setText((telegramReceivedMessage.getText() != null) ? telegramReceivedMessage.getText() : "");
         message.setDate(telegramReceivedMessage.getDate());
         message.setChatId(telegramReceivedMessage.getReceivedChat().getId());
         message.setUser((telegramReceivedMessage.getReceivedUser() != null) ? TelegramUser.toCoreUser(telegramReceivedMessage.getReceivedUser()) : new User());
