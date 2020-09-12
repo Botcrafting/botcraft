@@ -18,8 +18,10 @@ public class MessageChain {
 	
 	public void processMessage(Message message) {
 		for(MessageProcessor processor : processors) {
-			if(processor.processMessage(message))
+			if(processor.processMessage(message)) {
 				break;
+			}
+				
 		}
 	}
 }

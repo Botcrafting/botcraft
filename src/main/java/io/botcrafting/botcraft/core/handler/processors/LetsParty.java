@@ -25,6 +25,7 @@ public class LetsParty implements MessageProcessor{
 	public boolean processMessage(Message message) {
 		if(message.getLoweredText().contains(LETS_PARTY)) {
 			service.sendGif(message.getChatId(), String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "letsparty.mp4"));
+			return true;
 		}
 		return false;
 	}

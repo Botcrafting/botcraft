@@ -25,6 +25,7 @@ public class KillingMonsters implements MessageProcessor{
 	public boolean processMessage(Message message) {
 		if(message.getLoweredText().contains(KILLING_MONSTERS)) {
 			service.sendGif(message.getChatId(), String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "killingmonsters.mp4"));
+			return true;
 		}
 		return false;
 	}

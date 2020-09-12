@@ -20,8 +20,9 @@ public class MessageController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String receiveTelegramUpdate(@RequestBody TelegramUpdateReceived telegramUpdateReceived){
-    	if(telegramUpdateReceived.getReceivedMessage() != null)
+    	if(telegramUpdateReceived.getReceivedMessage() != null) {
     		messageHandler.handle(TelegramMessage.toCoreMessage(telegramUpdateReceived.getReceivedMessage()));
+    	}
         return "OK";
     }
 
