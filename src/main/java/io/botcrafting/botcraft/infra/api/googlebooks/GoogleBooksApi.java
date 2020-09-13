@@ -1,13 +1,12 @@
 package io.botcrafting.botcraft.infra.api.googlebooks;
 
-import static io.botcrafting.botcraft.configuration.constant.UrlConstant.GOOGLE_BOOKS_API_BASE_URL;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import io.botcrafting.botcraft.configuration.constant.UrlConstant;
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.core.service.BookService;
 import io.botcrafting.botcraft.infra.googlebooks.inbound.GoogleBooksVolumes;
@@ -32,7 +31,7 @@ public class GoogleBooksApi implements BookService {
 	}
 	
 	public GoogleBooksVolumes searchBookAtGoogleApi(GoogleBooksSearchRequest request) {
-        String url = GOOGLE_BOOKS_API_BASE_URL + String.format("/volumes?q=%s&maxResults=%d&langRestrict=%s&printType=%s",
+        String url = UrlConstant.GOOGLE_BOOKS_API_BASE_URL + String.format("/volumes?q=%s&maxResults=%d&langRestrict=%s&printType=%s",
                 request.getQuery(),
                 request.getMaxResults(),
                 request.getLangRestrict(),

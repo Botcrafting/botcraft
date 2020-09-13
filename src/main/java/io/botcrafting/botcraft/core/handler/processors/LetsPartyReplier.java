@@ -5,17 +5,17 @@ import org.springframework.stereotype.Component;
 import static io.botcrafting.botcraft.configuration.constant.MessageConstant.*;
 import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAFT_API_BASE_IMAGES_URL;
 
-import io.botcrafting.botcraft.core.handler.chain.MessageChain;
+import io.botcrafting.botcraft.core.handler.MessageChain;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
-public class LetsParty implements MessageProcessor{
+public class LetsPartyReplier implements MessageReplier{
 	
 	private MessageChain chain;
 	private MessageSenderService service;
 	
-	public LetsParty(MessageChain chain, MessageSenderService service) {
+	public LetsPartyReplier(MessageChain chain, MessageSenderService service) {
 		this.chain = chain;
 		this.service = service;
 		chain.registerProcessor(this);
