@@ -10,4 +10,13 @@ public class Message {
     private long chatId;
     private int date;
     private String text;
+    
+    
+    public String getFullName() {
+    	return this.getUser().getFirstName() + " " + this.getUser().getLastName();
+    }
+    
+    public String getLoweredText() {
+    	return this.getText().toLowerCase();
+    }
 }

@@ -1,6 +1,6 @@
 package io.botcrafting.botcraft.controller;
 
-import io.botcrafting.botcraft.core.handler.MessageHandler;
+import io.botcrafting.botcraft.core.handler.MessageReplierChain;
 import io.botcrafting.botcraft.infra.controller.message.MessageController;
 import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest(classes = MessageController.class)
 public class MessageControllerTest {
     @MockBean
-    private MessageHandler messageHandler;
+    private MessageReplierChain messageHandler;
 
     @Autowired
     private MessageController messageController;
