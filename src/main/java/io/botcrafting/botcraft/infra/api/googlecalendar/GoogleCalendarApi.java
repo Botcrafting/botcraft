@@ -3,6 +3,7 @@ package io.botcrafting.botcraft.infra.api.googlecalendar;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +19,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
-import com.google.api.services.calendar.model.EventReminder;
+import com.google.api.services.calendar.model.Events;
 
 import io.botcrafting.botcraft.core.model.Meeting;
 import io.botcrafting.botcraft.core.service.MeetingSchedulerService;
@@ -31,11 +32,7 @@ public class GoogleCalendarApi implements MeetingSchedulerService{
 
 	@Override
 	public boolean scheduleMeeting(Meeting meeting) {
-		GoogleCredential credential = getCredential();
-		NetHttpTransport httpTransport = getHttpTransport();
-		Calendar service = new Calendar.Builder(httpTransport, JSON_FACTORY, credential)
-				.setApplicationName("Botcraft")
-				.build();
+		Calendar service = getService();
 		if(meeting.isPresential()) {
 			return schedulePresentialMeeting(meeting, service);
 		}
@@ -111,7 +108,21 @@ public class GoogleCalendarApi implements MeetingSchedulerService{
 	
 	@Override
 	public List<Meeting> getAllScheduledMeetings() {
-		// TODO Auto-generated method stub
+		Calendar service = getService();
+		try {
+			Events events = service.events().list("primary")
+					.setOrderBy("startTime")
+					.setSingleEvents(true)
+					.execute();
+			List<Event>  items = events.getItems();
+			List<Meeting> meetings = fromEventListToCoreMeetingList(items);
+			return meetings;
+		}catch (IOException io) {
+			log.info("Failed to fetch all scheduled meetings");
+			log.info(io.getMessage());
+			io.printStackTrace();
+		}
+		
 		return null;
 	}
 
@@ -127,6 +138,38 @@ public class GoogleCalendarApi implements MeetingSchedulerService{
 		// TODO Auto-generated method stub
 		return false;
 		
+	}
+	
+	private List<Meeting> fromEventListToCoreMeetingList(List<Event> events){
+		List<Meeting> meetings = new ArrayList<>();
+		for(Event event : events) {
+			Meeting meeting = toCoreMeeting(event);
+			meetings.add(meeting);
+		}
+		return meetings;
+	}
+	
+	private Meeting toCoreMeeting(Event event) {
+		Meeting meeting = new Meeting();
+		meeting.setDescription(event.getDescription().isEmpty() ? "" : event.getDescription());
+		if(!event.getAttendees().isEmpty()) {
+			setEmaislToNotifyOnGivenMeeting(meeting, event.getAttendees());
+		}
+		meeting.setLocation(event.getLocation().isEmpty() ? "" : event.getLocation());
+		meeting.setMeetingUrl(event.getHangoutLink().isEmpty() ? "" : event.getHangoutLink());
+		meeting.setPresential(event.getHangoutLink().isEmpty() ? false : true);
+		meeting.setSummary(event.getSummary().isEmpty() ? "" : event.getSummary());
+		meeting.setStart(event.getStart().getDate() != null ? event.getStart().getDate() : null);
+		meeting.setEnd(event.getEnd().getDate() != null ? event.getEnd().getDate() : null);
+		return meeting;
+	}
+	
+	private void setEmaislToNotifyOnGivenMeeting(Meeting meeting, List<EventAttendee> attendees) {
+		for(EventAttendee attendee : attendees) {
+			if(!attendee.getEmail().isEmpty()) {
+				meeting.getEmailsToNotify().add(attendee.getEmail());
+			}
+		}
 	}
 	
 	private NetHttpTransport getHttpTransport() {
@@ -155,6 +198,15 @@ public class GoogleCalendarApi implements MeetingSchedulerService{
 			io.printStackTrace();
 		}
 		return null;
+	}
+	
+	private Calendar getService() {
+		GoogleCredential credential = getCredential();
+		NetHttpTransport httpTransport = getHttpTransport();
+		Calendar service = new Calendar.Builder(httpTransport, JSON_FACTORY, credential)
+				.setApplicationName("Botcraft")
+				.build();
+		return service;
 	}
 	
 	
