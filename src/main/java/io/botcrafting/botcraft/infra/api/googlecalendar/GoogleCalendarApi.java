@@ -132,13 +132,6 @@ public class GoogleCalendarApi implements MeetingSchedulerService{
 		return false;
 		
 	}
-
-	@Override
-	public boolean checkForMeetingsDaily() {
-		// TODO Auto-generated method stub
-		return false;
-		
-	}
 	
 	private List<Meeting> fromEventListToCoreMeetingList(List<Event> events){
 		List<Meeting> meetings = new ArrayList<>();

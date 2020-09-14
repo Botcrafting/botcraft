@@ -8,5 +8,4 @@ public interface MeetingSchedulerService {
 	public boolean scheduleMeeting(Meeting meeting);
 	public List<Meeting> getAllScheduledMeetings();
 	public boolean sendReminder(Meeting meeting);
-	public boolean checkForMeetingsDaily();
 }
