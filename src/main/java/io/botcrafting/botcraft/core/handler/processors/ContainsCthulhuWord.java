@@ -35,7 +35,7 @@ public class ContainsCthulhuWord implements MessageReplier{
 		) {
 			service.sendGif(
 					message.getChatId(),
-					String.format("%s%s", currentProfile.getProperty("bot_url") + "/images/", "cthulhu.gif.mp4")
+					String.format("%s%s", currentProfile.getProperty("bot_images_url"), "cthulhu.gif.mp4")
 			);
 			return true;
 		}
