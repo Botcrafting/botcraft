@@ -1,9 +1,5 @@
 package io.botcrafting.botcraft.controller;
 
-import io.botcrafting.botcraft.core.handler.MessageHandler;
-import io.botcrafting.botcraft.infra.controller.message.MessageController;
-import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +7,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
+import io.botcrafting.botcraft.core.message.MessageReplierChain;
+import io.botcrafting.botcraft.infra.controller.message.MessageController;
+import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MessageController.class)
 public class MessageControllerTest {
     @MockBean
-    private MessageHandler messageHandler;
+    private MessageReplierChain messageReplierChain;
 
     @Autowired
     private MessageController messageController;

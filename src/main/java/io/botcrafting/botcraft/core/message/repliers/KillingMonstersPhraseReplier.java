@@ -1,25 +1,22 @@
-package io.botcrafting.botcraft.core.handler.processors;
+package io.botcrafting.botcraft.core.message.repliers;
 
-import org.springframework.stereotype.Component;
-
-import static io.botcrafting.botcraft.configuration.constant.MessageConstant.*;
+import static io.botcrafting.botcraft.configuration.constant.MessageConstant.KILLING_MONSTERS;
 import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAFT_API_BASE_IMAGES_URL;
 
-import io.botcrafting.botcraft.core.handler.MessageReplierChain;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import io.botcrafting.botcraft.core.message.MessageReplier;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
-public class KillingMonsters implements MessageReplier{
+@Order(7)
+public class KillingMonstersPhraseReplier implements MessageReplier{
 	
-	private MessageReplierChain chain;
+	@Autowired
 	private MessageSenderService service;
-	
-	public KillingMonsters(MessageReplierChain chain, MessageSenderService service) {
-		this.chain = chain;
-		this.service = service;
-		chain.registerProcessor(this);
-	}
 
 	@Override
 	public boolean processMessage(Message message) {

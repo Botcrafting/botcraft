@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.core.handler.processors;
+package io.botcrafting.botcraft.core.message.repliers;
 
 import static io.botcrafting.botcraft.configuration.constant.CommandConstant.COMMAND_SEARCH_BOOK;
 import static io.botcrafting.botcraft.configuration.constant.MessageConstant.ANSWER_BOOK_FOUND;
@@ -9,31 +9,26 @@ import static io.botcrafting.botcraft.configuration.constant.MessageConstant.DES
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import io.botcrafting.botcraft.configuration.constant.MessageConstant;
-import io.botcrafting.botcraft.core.handler.MessageReplierChain;
+import io.botcrafting.botcraft.core.message.MessageReplier;
 import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.BookService;
 import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
-public class SearchBookReplier implements MessageReplier{
-
-	
-	private MessageReplierChain chain;
-	private MessageSenderService msgService;
-	private BookService bookService;
+@Order(12)
+public class SearchBooksReplier implements MessageReplier{
 
 	@Autowired
-	public SearchBookReplier(MessageReplierChain chain, MessageSenderService msgService, BookService bookService) {
-		this.chain = chain;
-		this.msgService = msgService;
-		this.bookService = bookService;
-		chain.registerProcessor(this);
-	}
-
+	private MessageSenderService msgService;
+	
+	@Autowired
+	private BookService bookService;
+	
 	@Override
 	public boolean processMessage(Message message) {
 		if(message.getLoweredText().startsWith("/") && message.getLoweredText().contains(COMMAND_SEARCH_BOOK)) {

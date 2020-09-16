@@ -1,4 +1,4 @@
-package io.botcrafting.botcraft.core.handler.processors;
+package io.botcrafting.botcraft.core.message;
 
 import io.botcrafting.botcraft.core.model.Message;
 import io.botcrafting.botcraft.core.service.BookService;
