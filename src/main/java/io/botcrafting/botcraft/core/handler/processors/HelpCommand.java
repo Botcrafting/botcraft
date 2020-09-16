@@ -12,13 +12,10 @@ import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
 public class HelpCommand implements MessageReplier{
-	
-	private MessageReplierChain chain;
-	private MessageSenderService service;
+	private final MessageSenderService service;
 
 	@Autowired
 	public HelpCommand(MessageReplierChain chain, MessageSenderService service) {
-		this.chain = chain;
 		this.service = service;
 		chain.registerProcessor(this);
 	}

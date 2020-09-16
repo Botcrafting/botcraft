@@ -12,13 +12,10 @@ import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
 public class EasterEggListCommand implements MessageReplier{
-	
-	private MessageReplierChain chain;
-	private MessageSenderService service;
+	private final MessageSenderService service;
 	
 	@Autowired
 	public EasterEggListCommand(MessageReplierChain chain, MessageSenderService service) {
-		this.chain = chain;
 		this.service = service;
 		chain.registerProcessor(this);
 	}
@@ -31,5 +28,4 @@ public class EasterEggListCommand implements MessageReplier{
 		}
 		return false;
 	}
-
 }

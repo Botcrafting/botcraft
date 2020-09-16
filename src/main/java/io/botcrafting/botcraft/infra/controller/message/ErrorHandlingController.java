@@ -13,12 +13,11 @@ import lombok.extern.java.Log;
 @ControllerAdvice
 @Log
 public class ErrorHandlingController {
-	
 	  @ExceptionHandler(HttpClientErrorException.class)
 	  @ResponseStatus(HttpStatus.OK)
 	  @ResponseBody
-	  public ResponseEntity onHttpClientErrorException(HttpClientErrorException characterNameAlreadyExists) {
+	  public ResponseEntity<HttpClientErrorException> onHttpClientErrorException(HttpClientErrorException characterNameAlreadyExists) {
 		  log.info("Caught Http client error exception, returning 200 to telegram so that won't block any posterior messages");
-		  return new ResponseEntity(HttpStatus.OK);
+		  return new ResponseEntity<>(HttpStatus.OK);
 	  }
 }
