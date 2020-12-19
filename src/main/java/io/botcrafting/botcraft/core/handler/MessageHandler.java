@@ -7,7 +7,6 @@ import io.botcrafting.botcraft.core.model.Message;
 
 @Service
 public class MessageHandler {
-	
 	@Autowired
 	MessageReplierChain chain;
 

@@ -13,7 +13,6 @@ import io.botcrafting.botcraft.infra.telegram.inbound.TelegramUpdateReceived;
 
 @RestController
 public class MessageController {
-
     @Autowired
     private MessageHandler messageHandler;
 

@@ -20,15 +20,11 @@ import io.botcrafting.botcraft.core.service.MessageSenderService;
 
 @Component
 public class SearchBookReplier implements MessageReplier{
-
-	
-	private MessageReplierChain chain;
-	private MessageSenderService msgService;
-	private BookService bookService;
+	private final MessageSenderService msgService;
+	private final BookService bookService;
 
 	@Autowired
 	public SearchBookReplier(MessageReplierChain chain, MessageSenderService msgService, BookService bookService) {
-		this.chain = chain;
 		this.msgService = msgService;
 		this.bookService = bookService;
 		chain.registerProcessor(this);
@@ -49,10 +45,10 @@ public class SearchBookReplier implements MessageReplier{
         	handleEmptyCommand(message);
         	return;
         }
-        if (!searchText.isBlank() && !searchText.isEmpty() && !searchText.equals(" ")) {
+        if (!searchText.isBlank()) {
             try {
             		Optional<Book> foundBook = searchBook(message.getChatId(), message.getFullName(), searchText);
-	            	if(!foundBook.isEmpty()) {
+	            	if(foundBook.isPresent()) {
 		            	String bookAnswerMessage = createBookAnswerMessage(foundBook.get());
 		                msgService.sendMessageText(message.getChatId(), String.format(ANSWER_BOOK_FOUND, message.getFullName()));
 	                    msgService.sendPhoto(message.getChatId(), foundBook.get().getImageUrl(), bookAnswerMessage);
@@ -80,15 +76,11 @@ public class SearchBookReplier implements MessageReplier{
 	}
 	
 	private String createBookAnswerMessage(Book foundBook) {
-		StringBuilder bookMessage = new StringBuilder();
-        bookMessage.append(String.format(MessageConstant.TITLE_BOOK, foundBook.getTitle()));
-        bookMessage.append(String.format(MessageConstant.AUTHOR_BOOK, foundBook.getAuthor()));
-        bookMessage.append(String.format(MessageConstant.PUBLISHER_BOOK, foundBook.getPublisher()));
-        bookMessage.append(String.format(MessageConstant.PUBLISH_DATE_BOOK, foundBook.getPublishDate()));
-        bookMessage.append(String.format(MessageConstant.ISBN13_BOOK, foundBook.getIsbn13()));
-        bookMessage.append(String.format(MessageConstant.ISBN10_BOOK, foundBook.getIsbn10()));
-        return bookMessage.toString();
-
+		return String.format(MessageConstant.TITLE_BOOK, foundBook.getTitle()) +
+				String.format(MessageConstant.AUTHOR_BOOK, foundBook.getAuthor()) +
+				String.format(MessageConstant.PUBLISHER_BOOK, foundBook.getPublisher()) +
+				String.format(MessageConstant.PUBLISH_DATE_BOOK, foundBook.getPublishDate()) +
+				String.format(MessageConstant.ISBN13_BOOK, foundBook.getIsbn13()) +
+				String.format(MessageConstant.ISBN10_BOOK, foundBook.getIsbn10());
 	}
-
 }

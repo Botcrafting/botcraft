@@ -4,24 +4,30 @@ import io.botcrafting.botcraft.core.model.Book;
 import io.botcrafting.botcraft.infra.googlebooks.inbound.GoogleBooksItem;
 import io.botcrafting.botcraft.infra.googlebooks.inbound.GoogleBooksVolumeInfo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.lang.NonNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static io.botcrafting.botcraft.configuration.constant.UrlConstant.BOTCRAFT_API_BASE_IMAGES_URL;
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_TYPE_ISBN_10;
 import static io.botcrafting.botcraft.configuration.constant.ValueConstant.VALUE_TYPE_ISBN_13;
 
 public class BookMapper {
-    public static Book map(GoogleBooksItem response) {
+    @Autowired
+    private Environment currentEnvironment;
+
+    private String x = currentEnvironment.getProperty("");
+
+    public static Book map(GoogleBooksItem response, Environment env) {
         Book book = new Book();
         book.setId((response.getId() != null) ? response.getId() : "");
         book.setTitle((response.getBook() != null) ? mapTitle(response.getBook()) : "");
         book.setDescription((response.getBook() != null) ? mapDescription(response.getBook()) : "");
         book.setAuthor((response.getBook() != null) ? mapAuthor(response.getBook()) : "");
-        book.setImageUrl((response.getBook() != null) ? mapImageUrl(response.getBook()) : "");
+        book.setImageUrl((response.getBook() != null) ? mapImageUrl(response.getBook(), env) : "");
         book.setIsbn10((response.getBook() != null) ? mapIsbn10(response.getBook()) : "");
         book.setIsbn13((response.getBook() != null) ? mapIsbn13(response.getBook()) : "");
         book.setPublisher((response.getBook() != null) ? mapPublisher(response.getBook()) : "");
@@ -92,12 +98,12 @@ public class BookMapper {
     }
 
     @NonNull
-    private static String mapImageUrl(GoogleBooksVolumeInfo book) {
+    private static String mapImageUrl(GoogleBooksVolumeInfo book, Environment env) {
         String imageUrl;
         if(book.getImageLink() != null) {
             imageUrl = (book.getImageLink().getThumbnail() != null) ? String.format("%s%s", book.getImageLink().getThumbnail(), "&fife=w600-h800") : "";
         } else {
-            imageUrl = String.format("%s%s", BOTCRAFT_API_BASE_IMAGES_URL, "no_image_book.jpeg");
+            imageUrl = String.format("%s%s", env.getProperty("bot_images_url"), "no_image_book.jpeg");
         }
         return imageUrl;
     }

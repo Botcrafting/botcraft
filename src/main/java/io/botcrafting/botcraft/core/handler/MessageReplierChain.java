@@ -10,7 +10,7 @@ import io.botcrafting.botcraft.core.model.Message;
 
 @Component
 public class MessageReplierChain {
-	private List<MessageReplier> processors =  new ArrayList<>();
+	private final List<MessageReplier> processors =  new ArrayList<>();
 	
 	public void registerProcessor(MessageReplier processor) {
 		this.processors.add(processor);
@@ -21,7 +21,6 @@ public class MessageReplierChain {
 			if(processor.processMessage(message)) {
 				break;
 			}
-				
 		}
 	}
 }

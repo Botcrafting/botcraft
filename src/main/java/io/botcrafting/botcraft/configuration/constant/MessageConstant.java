@@ -2,6 +2,7 @@ package io.botcrafting.botcraft.configuration.constant;
 
 public class MessageConstant {
     public static String CTHULHU_AWAKEN = "Ph'nglui mglw'nafh Cthulhu R'lyeh wagah'nagl fhtagn.";
+    public static String STANDARD_ERROR_MESSAGE = "Desculpe, não consegui entender o que você disse!!!";
     public static String WORD_CTHULHU = "cthulhu";
     public static String BOTCRAFT_NAME = "botcraft";
     public static String QUESTION_IS_GOING_TO_RAIN = "vai chover hoje";
@@ -42,6 +43,9 @@ public class MessageConstant {
             "-> *botcraft* + *stephen king* - Respondo se conheço o escritor Stephen King.\n" +
             "-> *botcraft* + *lugar para ir* - Respondo com alguns lugares super legais para ir.\n" +
             "-> *cthulhudesperta* - Respondo com uma frase bem famosa do nosso amigo H. P. Lovecraft.\n" +
+            "-> *pela horda* - Conhece WoW?\n" +
+            "-> *matando monstros* - Conhece Geralt de Rivia?\n" +
+            "-> *festa* - Festa!!!\n" +
             "\n" +
             "Bom uso!";
 }
